@@ -1,9 +1,9 @@
 <?php
   $registros = array();
-   $lasInsertID=0;
+   $lasInsertID="";
    
      //Realizar la conexion con MySQL
-   $conn = new mysqli("127.0.0.1", "root", " ", "new2015NW");
+  $conn = new mysqli("127.0.0.1", "root", "", "new201501");
     if($conn->errno){
       die("DB no can: " . $conn->error);
     }
@@ -22,20 +22,12 @@
     //Ejecutar el Insert Statement
     $result = $conn->query($sqlinsert);
     //Obtener el último codigo generado
-  }
-    
-    if(isset($_POST["btnUps"])){
-    
-    $ssql="UPDATE `productos` SET  `prdid`='{$_POST['prdid']}', `prddsc`='{$_POST['prddsc']}',`prdbrc`='{$_POST['prdbrc']}',`prdctd`='{$_POST['prdctd']}',`prdest`='{$_POST['prdest']}',`ctgid`='{$_POST['ctgid']}' WHERE `prdid`='{$_POST['prdid']}'";
-    $result = $conn->query($ssql);
-  }
-    
-    
-    
-    
     $lasInsertID= $conn->insert_id;
-  
-  $sqlQuery="Select * from productos;";
+  }
+    
+    
+    
+    $sqlQuery="Select * from productos;";
   $resulCursor=$conn->query($sqlQuery);
   
  while($registro = $resulCursor->fetch_assoc()){
@@ -54,31 +46,29 @@
   </head>
   <body>
     <h1>Productos</h1>
-    <form action="prod.php" method="POST">
+    <form action="productos.php" method="POST">
         <label for="prddsc">Descripción</label>
-        <input type="text" name="prddsc" id="prddsc" value="<?php echo $registro["descripcion"] = $_POST["prddsc"]?>"/>
+        <input type="text" name="prddsc" id="prddsc"/>
         <br/>
         <label for="prdbrc">Brc</label>
-        <input type="text" name="prdbrc" id="prdbrc" value="<?php echo $registro["brc"] = $_POST["prdbrc"]?>" />
+        <input type="text" name="prdbrc" id="prdbrc"  />
         <br/>
         <label for="prdctd">Cantidad</label>
-        <input type="text" name="prdctd" id="prdctd" value="<?php echo $registro["cant"] = $_POST["prdctd"]?>" />
+        <input type="text" name="prdctd" id="prdctd" />
         <br/>
         <label for="prdest">Estado</label>
-        <select name="prdest" id="prdest" value="<?php echo $registro["estado"] = $_POST["prdest"]?>">
+        <select name="prdest" id="prdest" />
             <option value="PND">Pendiente</option>
             <option value="CNF">Confirmado</option>
             <option value="CNL">Cancelado</option>
         </select>
         <br/>
         <label for="ctgid">CategoriaId</label>
-        <input type="text" name="ctgid" id="ctgid" value="<?php echo $registro["categoria"] = $_POST["ctgid"]?>"/>
+        <input type="text" name="ctgid" id="ctgid" />
         <br/>
         <input type="submit" name="btnIns" value="Guardar" />
         <br/>
-         <label for="prdid">Id para actualizar</label>
-        <input type="text" name="prdid" id="prdid" />
-        <input type="submit" name="btnUps" value="Actualizar" />
+        
     </form>
     <div>
       <h2>Datos</h2>
@@ -108,6 +98,7 @@
       
         ?>
       </table>
+       <?php echo "Last Saved Id =  $lasInsertID"?>
     </div>
   </body>
 </html>
