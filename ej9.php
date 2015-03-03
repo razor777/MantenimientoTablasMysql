@@ -116,26 +116,26 @@
            Producto
          </label>
          <input type="text" value="<?php echo $producto["prddsc"]; ?>"
-                name="prddsc" id="prddsc" />
+                name="prddsc" id="prddsc" <?php if($mode=="delete") echo 'disabled="disabled"'; ?>/>
          <br/>
          <label for="prdbrc">
            Código de Barra<br/><i>EAN32, QR, CODE 189</i>
          </label>
          <input type="text" value="<?php echo $producto["prdbrc"]; ?>"
-                name="prdbrc" id="prdbrc" />
+                name="prdbrc" id="prdbrc" <?php if($mode=="delete") echo 'disabled="disabled"'; ?> />
          <br/>
 
          <label for="prdctd">
            Cantidad
          </label>
          <input type="number" value="<?php echo $producto["prdctd"]; ?>"
-                name="prdctd" id="prdctd" />
+                name="prdctd" id="prdctd" <?php if($mode=="delete") echo 'disabled="disabled"'; ?> />
          <br/>
 
          <label for="prdest">
            Estado
          </label>
-         <select id="prdest" name="prdest">
+         <select id="prdest" name="prdest" <?php if($mode=="delete") echo 'disabled="disabled"'; ?>>
            <option value="ACT" <?php echo ($producto["prdest"]=="ACT")?"selected":""; ?> >Activo</option>
            <option value="INA" <?php echo ($producto["prdest"]=="INA")?"selected":""; ?>>Inactivo</option>
            <option value="DES" <?php echo ($producto["prdest"]=="DES")?"selected":""; ?>>Descontinuado</option>
@@ -143,7 +143,7 @@
          </select>
          <br/>
         <label for="ctgid"> Categoría</label>
-         <select id="ctgid" name="ctgid">
+         <select id="ctgid" name="ctgid" <?php if($mode=="delete") echo 'disabled="disabled"'; ?>>
            <?php
               foreach($categorias as $categoria){
                 echo '<option value="'.$categoria["ctgid"].'">'.$categoria["ctgdsc"].'</option>';
